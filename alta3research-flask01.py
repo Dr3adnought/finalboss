@@ -20,25 +20,22 @@ movies_list = []
 # serve homepage template
 @app.route("/")
 def index():
-    return render_template("index.html")
-
-# accepting input from user POSTing a submission
-
-
-# @app.route("/addtolist", methods=["POST"])
-# def addtolist():
-#     return render_template("listed.html", movies=movies)
+    return render_template("index.html")  # renders html page
 
 
 @app.route("/listed", methods=["POST", "GET"])
 def listed():
+    # input and assignment to variable
     movies = request.form.get("movies")
+    # input and assignment to variable
     name = request.form.get("name")
-    print(movies)
-    print(name)
+    print(movies)                               # print in terminal
+    print(name)                                 # print in terminal
+    # append running list (only on current run, if code hasn't been broken)
     movies_list.append({name: movies})
-    if not movies or not name:
-        return render_template("failure.html")
+    if not movies or not name:                  # logic to check entries
+        return render_template("failure.html")  # renders failure html page
+    # renders listed html page
     return render_template("listed.html", movies=movies_list)
 
 
