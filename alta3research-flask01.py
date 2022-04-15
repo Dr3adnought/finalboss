@@ -7,13 +7,14 @@ from tkinter.font import names
 from flask import Flask, render_template, request
 import requests
 from flask import redirect
+from flask import url_for
 from flask import jsonify
 from html import unescape
 import csv
 app = Flask(__name__)
 
 # List of movies
-movies = []
+movies_list = []
 
 
 # serve homepage template
@@ -24,26 +25,21 @@ def index():
 # accepting input from user POSTing a submission
 
 
-@app.route("/wanted", methods=["POST"])
-def wanted():
-    movies = request.form.get["movies"]
-    name = request.form.get["name"]
+# @app.route("/addtolist", methods=["POST"])
+# def addtolist():
+#     return render_template("listed.html", movies=movies)
+
+
+@app.route("/listed", methods=["POST", "GET"])
+def listed():
+    movies = request.form.get("movies")
+    name = request.form.get("name")
+    print(movies)
+    print(name)
+    movies_list.append({name: movies})
     if not movies or not name:
         return render_template("failure.html")
-    with open("/Users/jeffrlek/PythonClass/finalboss/list.csv", "a") as file:
-        writer = csv.writer(file)
-        writer.writerow((movies, name))
-    return render_template("listed.html")
-
-# submissions pushed here
-
-
-@app.route("/listed", methods=['POST'])
-def listed():
-    with open("/Users/jeffrlek/PythonClass/finalboss/list.csv", "r") as file:
-        reader = csv.reader(file)
-        movies = list(reader)
-    return render_template("success.html", movies=movies)
+    return render_template("listed.html", movies=movies_list)
 
 
 if __name__ == "__main__":

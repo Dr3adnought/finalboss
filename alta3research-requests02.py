@@ -6,4 +6,4 @@ URL = "http://localhost:5000/"
 
 resp = requests.get(URL).json()
 
-pprint(resp)
+print(resp)
