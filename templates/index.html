@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <div>
+        <h1>Family Movie Wishlist</h1>
+        <form action="/listed" method="post">
+            <h2>Is there a movie you wish to see?</h2>
+            <h2>Please add it to the list below</h2>
+            <input type="text" movies="movies" placeholder="Movie title">
+            <select name="name">
+                <option disabled selected value="">--</option>
+                <option value="Dad">D</option>
+                <option value="Mom">M</option>
+                <option value="DaughterA">A</option>
+                <option value="DaughterT">T</option>
+                <option value="Son">Son</option>
+            </select>
+            <input type="submit" value="Add">        
+        </form>
+    </div>
+{% endblock %}
